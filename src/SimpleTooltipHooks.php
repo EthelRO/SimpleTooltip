@@ -10,6 +10,7 @@ class SimpleTooltipHooks {
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
 		// Add as ResourceLoader Module
 		$out->addModules( 'ext.SimpleTooltip' );
+		$out->addModules( 'ext.SimpleTooltip.ItemDescription' );
 	}
 
 	/**
@@ -27,6 +28,9 @@ class SimpleTooltipHooks {
 
 		$parser->setFunctionHook( 'simple-tooltip-img', [ __CLASS__, 'imgTooltip' ] );
 		$parser->setFunctionHook( 'tip-img', [ __CLASS__, 'imgTooltip' ] );
+		
+		$parser->setFunctionHook( 'item-tooltip', [ __CLASS__, 'itemTooltip' ] );
+		$parser->setFunctionHook( 'tip-item', [ __CLASS__, 'itemTooltip' ] );
 	}
 
 	/**
@@ -108,6 +112,39 @@ class SimpleTooltipHooks {
 
 		$html .= ' data-simple-tooltip="' . htmlspecialchars( Sanitizer::removeSomeTags( $title ) ) . '"';
 		$html .= ' src="' . $imgUrl . '"></img>';
+
+		return [
+			$html,
+			'noparse' => true,
+			'isHTML' => true,
+			'markerType' => 'nowiki'
+		];
+	}
+	
+	/**
+	 * Parser function handler for {{#tip-item: inline-text | item-json-data }}
+	 *
+	 * @param Parser $parser
+	 * @param string $value
+	 * @return array
+	 */
+	public static function itemTooltip( Parser $parser, string $value ) {
+		$args = array_slice( func_get_args(), 2 );
+		$itemData = $args[0];
+
+		if ( !$itemData ) {
+			return [];
+		}
+
+		// Clean and sanitize JSON data
+		$itemData = Sanitizer::removeSomeTags( $itemData );
+		$itemData = str_replace( '"', "'", $itemData );
+		$itemData = trim( $itemData );
+		$itemData = htmlspecialchars( $itemData );
+
+		$html = '<span class="ethelro-item-tooltip"';
+		$html .= ' data-item-tooltip="' . $itemData . '"';
+		$html .= '>' . htmlspecialchars( $value ) . '</span>';
 
 		return [
 			$html,

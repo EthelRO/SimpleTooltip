@@ -16,4 +16,6 @@ $magicWords['en'] = [
 	'tip-text' => [ 0, 'tip-text' ],
 	'tip-info' => [ 0, 'tip-info' ],
 	'tip-img' => [ 0, 'tip-img' ],
+	'item-tooltip' => [ 0, 'item-tooltip' ],
+	'tip-item' => [ 0, 'tip-item' ],
 ];

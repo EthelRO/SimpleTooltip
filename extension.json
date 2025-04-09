@@ -37,6 +37,21 @@
 				"lib/tooltipster.css",
 				"lib/SimpleTooltip.css"
 			]
+		},
+		"ext.SimpleTooltip.ItemDescription": {
+			"targets": [
+				"mobile",
+				"desktop"
+			],
+			"scripts": [
+				"lib/ItemDescription.js"
+			],
+			"styles": [
+				"lib/ItemDescription.css"
+			],
+			"dependencies": [
+				"ext.SimpleTooltip"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {
