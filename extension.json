@@ -52,6 +52,18 @@
 			"dependencies": [
 				"ext.SimpleTooltip"
 			]
+		},
+		"ext.SimpleTooltip.Debug": {
+			"targets": [
+				"mobile",
+				"desktop"
+			],
+			"scripts": [
+				"lib/debug-helper.js"
+			],
+			"dependencies": [
+				"ext.SimpleTooltip.ItemDescription"
+			]
 		}
 	},
 	"ResourceFileModulePaths": {

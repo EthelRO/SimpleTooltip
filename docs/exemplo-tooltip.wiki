@@ -1,0 +1,53 @@
+= Exemplo de Tooltip de Itens =
+
+== Exemplo Básico ==
+
+{{#tip-item:+7 Sword|{"id": 1101, "name": "Sword", "refine": 7, "enchantgrade": 2, "description": "Uma espada básica com ^ff0000poder de ataque +150^000000", "imageUrl": "https://www.novaragnarok.com/data/items/icons2/razor.png"}}}
+
+== Exemplo com Cards ==
+
+{{#tip-item:+10 Espada com cards|{"id": 1102, "name": "Espada Forte", "refine": 10, "enchantgrade": 3, "description": "Uma espada poderosa com ^ff0000ATK +200^000000\nForça +5\nVitalidade +2", "imageUrl": "https://www.novaragnarok.com/data/items/icons2/executioner_.png", "slots": 4, "cards": [{"id": 4001, "name": "Poring Card", "description": "DEF +20"}]}}}
+
+== Exemplo sem Imagem ==
+
+{{#tip-item:Item sem imagem|{"id": 1103, "name": "Item Misterioso", "description": "Este item não possui uma imagem definida"}}}
+
+== Formato JSON ==
+
+Para usar o tooltip, você precisa formatar seu JSON assim:
+
+<pre>
+{
+  "id": 1101,
+  "name": "Nome do Item",
+  "refine": 7,              // Opcional: nível de refino
+  "enchantgrade": 2,        // Opcional: grau do encantamento (1-4)
+  "description": "Descrição do item com ^ff0000texto colorido^000000",
+  "imageUrl": "https://url-da-imagem.png",  // Opcional: URL da imagem
+  "slots": 4,               // Opcional: número de slots
+  "cards": [                // Opcional: array de cards
+    {
+      "id": 4001,
+      "name": "Nome do Card",
+      "description": "Descrição do card"
+    }
+  ]
+}
+</pre>
+
+== Formatação de Texto ==
+
+Você pode usar o formato ^RRGGBB para mudar a cor do texto:
+
+* ^ff0000 - Vermelho
+* ^00ff00 - Verde
+* ^0000ff - Azul
+* ^ffff00 - Amarelo
+* ^000000 - Preto (para voltar ao normal)
+
+== Cores dos Graus ==
+
+* Grau 1: Verde
+* Grau 2: Azul
+* Grau 3: Roxo
+* Grau 4: Dourado 

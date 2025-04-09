@@ -11,6 +11,12 @@ class SimpleTooltipHooks {
 		// Add as ResourceLoader Module
 		$out->addModules( 'ext.SimpleTooltip' );
 		$out->addModules( 'ext.SimpleTooltip.ItemDescription' );
+		
+		// Carregar o debug se requisitado via URL
+		$request = $out->getRequest();
+		if ( $request->getVal( 'simpletooltip-debug' ) === '1' ) {
+			$out->addModules( 'ext.SimpleTooltip.Debug' );
+		}
 	}
 
 	/**
@@ -136,14 +142,21 @@ class SimpleTooltipHooks {
 			return [];
 		}
 
-		// Clean and sanitize JSON data
+		// Limpar e sanitizar os dados JSON, mas preservar aspas duplas
 		$itemData = Sanitizer::removeSomeTags( $itemData );
-		$itemData = str_replace( '"', "'", $itemData );
+		// Deixar aspas duplas intactas se possível
+		// $itemData = str_replace( '"', "'", $itemData );
 		$itemData = trim( $itemData );
-		$itemData = htmlspecialchars( $itemData );
+		// Encode as HTML entities to preserve the JSON structure
+		$itemDataAttr = htmlspecialchars( $itemData, ENT_QUOTES, 'UTF-8' );
+
+		// Adicionar verificação para debug
+		$loggedItemData = json_encode($itemData);
+		wfDebugLog('simpletooltip', "Item Tooltip Data: $loggedItemData");
 
 		$html = '<span class="ethelro-item-tooltip"';
-		$html .= ' data-item-tooltip="' . $itemData . '"';
+		$html .= ' data-item-tooltip="' . $itemDataAttr . '"';
+		$html .= ' style="border-bottom: 1px dotted #007bff; cursor: pointer;"';
 		$html .= '>' . htmlspecialchars( $value ) . '</span>';
 
 		return [

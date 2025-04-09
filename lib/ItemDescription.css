@@ -1,25 +1,46 @@
 /* ItemDescription Tooltip Styles */
 
+/* Add Tahoma fallback font for better cross-browser support */
+@font-face {
+  font-family: 'FS_Tahoma';
+  src: local('Tahoma');
+  font-display: swap;
+}
+
+/* Tooltip container styling */
+.item-tooltip-container {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  border-radius: 8px;
+  min-width: 290px;
+  max-width: 350px;
+  pointer-events: auto !important; /* Ensure tooltip can be interacted with */
+}
+
+.ethelro-item-tooltip {
+  cursor: pointer;
+  border-bottom: 1px dotted #007bff;
+  display: inline-block;
+}
+
 .ethelro-tooltip {
-  font-family: FS_Tahoma, Tahoma, sans-serif;
+  font-family: Tahoma, Arial, sans-serif;
   font-size: 16px;
-  letter-spacing: 1px;
+  letter-spacing: 0.5px;
   line-height: 1.2;
-  image-rendering: pixelated;
-  -webkit-font-smoothing: none;
+  image-rendering: auto;
+  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-smooth: never;
-  text-shadow: none;
-  text-rendering: geometricPrecision;
+  text-rendering: optimizeLegibility;
 }
 
 .ethelro-tooltip .tooltip-container {
   height: auto;
   background-color: white;
-  width: 290px;
+  width: 100%;
   border-radius: 8px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
 }
 
 .ethelro-tooltip .gradient-border {
@@ -37,6 +58,7 @@
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
+  pointer-events: none;
 }
 
 .ethelro-tooltip .grade-header {
@@ -45,7 +67,7 @@
   position: absolute;
   width: 100%;
   border-bottom-width: 1px;
-  image-rendering: pixelated;
+  image-rendering: auto;
   z-index: 15;
   mix-blend-mode: multiply;
   opacity: 1;
@@ -55,7 +77,7 @@
   display: flex;
   flex-direction: row;
   position: relative;
-  min-height: 280px;
+  min-height: 250px;
   max-height: 420px;
   z-index: 20;
 }
@@ -68,10 +90,12 @@
 }
 
 .ethelro-tooltip .tooltip-image img {
-  width: 77px;
-  height: 102px;
+  width: 77px !important;
+  height: 102px !important;
   box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
   border-radius: 0;
+  object-fit: contain;
+  background-color: #f8f8f8;
 }
 
 .ethelro-tooltip .tooltip-info {
