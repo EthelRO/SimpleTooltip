@@ -131,30 +131,28 @@
   width: calc(100% - 95px); /* Garantir que não ultrapasse a largura disponível */
 }
 
+.ethelro-tooltip .title-divider {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 8px;
+  margin: 2px 0;
+}
+
+.ethelro-tooltip .divider-line {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.15);
+  width: 100%;
+  margin: 1px 0;
+}
+
 .ethelro-tooltip .tooltip-title {
   height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4px 8px 4px 0;
+  padding: 4px 0;
   position: relative;
-}
-
-.ethelro-tooltip .title-divider-top,
-.ethelro-tooltip .title-divider-bottom {
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.15);
-  width: 100%;
-  margin-left: 8px;
-  margin-right: 8px;
-}
-
-.ethelro-tooltip .title-divider-top {
-  margin-bottom: 3px;
-}
-
-.ethelro-tooltip .title-divider-bottom {
-  margin-top: 3px;
 }
 
 .ethelro-tooltip .tooltip-title h1 {
@@ -162,16 +160,13 @@
   font-size: 15px;
   letter-spacing: 0;
   z-index: 30;
-  padding-left: 8px;
-  padding-right: 8px;
-  width: calc(100% - 16px);
+  padding: 0 8px;
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   position: relative;
-  padding-top: 1px;
-  padding-bottom: 1px;
-  margin: 0;
+  margin: 4px 0;
   font-weight: bold;
   font-family: 'FS_Tahoma', Tahoma, Arial, sans-serif;
   font-smooth: never;
@@ -207,12 +202,20 @@
 }
 
 /* Adicionar linhas horizontais como separadores na descrição */
+.ethelro-tooltip .hr-divider-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 4px 0;
+  padding: 0;
+}
+
 .ethelro-tooltip .hr-divider {
   height: 1px;
   background-color: rgba(0, 0, 0, 0.15);
   width: 100%;
   border: none;
-  margin: 2px 0;
+  margin: 1px 0;
 }
 
 /* Grade background colors */
