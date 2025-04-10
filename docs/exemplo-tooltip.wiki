@@ -12,6 +12,35 @@
 
 {{#tip-item:Item sem imagem|{"id": 1103, "name": "Item Misterioso", "description": "Este item não possui uma imagem definida"}}}
 
+= Nova Função Item =
+
+== Exemplos de Uso da Função Item ==
+
+Apenas ícone do item:
+{{#item: 502}}
+
+Ícone com nome:
+{{#item: 502 | showname=true}}
+
+Ícone com tooltip completo (hover para ver descrição):
+{{#item: 502 | showdescription=true}}
+
+Ícone com nome e tooltip:
+{{#item: 502 | showname=true | showdescription=true}}
+
+Alterando o tamanho do ícone:
+{{#item: 502 | width=48 | showname=true}}
+
+Desabilitando o cache:
+{{#item: 502 | cache=false | showname=true}}
+
+== Parâmetros Disponíveis ==
+
+* <code>showname</code> ou <code>name</code> ou <code>show_name</code>: Exibe o nome do item (valores: true/false)
+* <code>showdescription</code> ou <code>description</code> ou <code>show_description</code>: Habilita o tooltip ao passar o mouse (valores: true/false)
+* <code>width</code> ou <code>icon_width</code>: Define a largura do ícone em pixels (valor numérico)
+* <code>cache</code>: Define se os dados do item devem ser armazenados em cache (valores: true/false)
+
 == Formato JSON ==
 
 Para usar o tooltip, você precisa formatar seu JSON assim:
