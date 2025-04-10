@@ -37,7 +37,10 @@
   font-kerning: none;
   font-variant-ligatures: none;
   image-rendering: pixelated;
-  text-decoration: none;
+  text-decoration: none !important;
+  text-align: left;
+  border-bottom: none !important;
+  display: inline-block;
 }
 
 .ethelro-tooltip {
@@ -138,7 +141,7 @@
   height: 20px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 4px 0;
   position: relative;
   background-image: repeating-linear-gradient(
@@ -159,7 +162,7 @@
   min-width: 50px;
   max-width: 90%;
   display: inline-block;
-  text-align: center;
+  text-align: left;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
