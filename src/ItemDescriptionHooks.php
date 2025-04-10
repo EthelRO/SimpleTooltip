@@ -9,12 +9,12 @@ class ItemDescriptionHooks {
 	 */
 	public static function onBeforePageDisplay( OutputPage $out, Skin $skin ) {
 		// Add as ResourceLoader Module
-		$out->addModules( 'ext.ItemDescription' );
+		$out->addModules( 'ext.SimpleTooltip' );
 		
 		// Carregar o debug se requisitado via URL
 		$request = $out->getRequest();
 		if ( $request->getVal( 'itemdescription-debug' ) === '1' ) {
-			$out->addModules( 'ext.ItemDescription.Debug' );
+			$out->addModules( 'ext.SimpleTooltip.Debug' );
 		}
 	}
 
@@ -24,16 +24,13 @@ class ItemDescriptionHooks {
 	 * @param Parser $parser
 	 */
 	public static function onParserFirstCallInit( Parser $parser ) {
-		// Register parser functions apenas para item tooltips
-		$parser->setFunctionHook( 'item-tooltip', [ __CLASS__, 'itemTooltip' ] );
-		$parser->setFunctionHook( 'tip-item', [ __CLASS__, 'itemTooltip' ] );
-		
-		// Register new item parser function
+		// Registrar apenas o hook item por enquanto
 		$parser->setFunctionHook( 'item', [ __CLASS__, 'itemDisplay' ] );
 	}
 	
 	/**
 	 * Parser function handler for {{#tip-item: inline-text | item-json-data }}
+	 * Temporariamente desativado
 	 *
 	 * @param Parser $parser
 	 * @param string $value

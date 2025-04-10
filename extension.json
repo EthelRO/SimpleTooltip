@@ -1,5 +1,5 @@
 {
-	"name": "ItemDescription",
+	"name": "SimpleTooltip",
 	"version": "1.0.0",
 	"author": [
 		"EthelRO Team"
@@ -12,18 +12,18 @@
 		"MediaWiki": ">= 1.39.0"
 	},
 	"MessagesDirs": {
-		"ItemDescription": [
+		"SimpleTooltip": [
 			"i18n"
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"ItemDescriptionMagic": "ItemDescription.i18n.magic.php"
+		"SimpleTooltipMagic": "SimpleTooltip.i18n.magic.php"
 	},
 	"AutoloadClasses": {
 		"ItemDescriptionHooks": "src/ItemDescriptionHooks.php"
 	},
 	"ResourceModules": {
-		"ext.ItemDescription": {
+		"ext.SimpleTooltip": {
 			"targets": [
 				"mobile",
 				"desktop"
@@ -35,7 +35,7 @@
 				"lib/ItemDescription.css"
 			]
 		},
-		"ext.ItemDescription.Debug": {
+		"ext.SimpleTooltip.Debug": {
 			"targets": [
 				"mobile",
 				"desktop"
@@ -44,16 +44,16 @@
 				"lib/debug-helper.js"
 			],
 			"dependencies": [
-				"ext.ItemDescription"
+				"ext.SimpleTooltip"
 			]
 		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
-		"remoteExtPath": "ItemDescription"
+		"remoteExtPath": "SimpleTooltip"
 	},
 	"config": {
-		"ItemDescriptionEnabled": {
+		"SimpleTooltipEnabled": {
 			"value": true
 		}
 	},
