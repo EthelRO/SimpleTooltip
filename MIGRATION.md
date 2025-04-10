@@ -30,16 +30,26 @@ Substitua todas as ocorrências dos parser functions antigos pelos novos:
 - `{{#tip-info:}}`
 - `{{#simple-tooltip-img:}}`
 - `{{#tip-img:}}`
-
-### Tags a serem utilizadas
 - `{{#item-tooltip:}}` ou `{{#tip-item:}}`
+
+### Nova tag a ser utilizada
+- `{{#item:ID_DO_ITEM}}` - Exibe o ícone do item, nome e descrição ao passar o mouse
+
+#### Exemplos de uso da tag {{#item:}}
+- `{{#item:502}}` - Mostra ícone, nome e descrição (tooltip)
+- `{{#item:502|noname}}` ou `{{#item:502|nn}}` - Oculta o nome do item
+- `{{#item:502|nodescription}}` ou `{{#item:502|nd}}` - Remove o tooltip
+- `{{#item:502|noslots}}` ou `{{#item:502|ns}}` - Oculta informação de slots
+- `{{#item:502|width=32}}` - Define um tamanho personalizado para o ícone
+- `{{#item:502|noname|nodescription}}` - Mostra apenas o ícone
 
 ## Passo 4: Verificando a instalação
 
-Após a instalação, você pode verificar se tudo está funcionando corretamente acessando uma página com o tooltip ativado:
+Após a instalação, você pode verificar se tudo está funcionando corretamente acessando uma página com exemplos:
 
 ```
-{{#tip-item:+7 Espada|{"id": 1101, "name": "Espada", "refine": 7, "enchantgrade": 2, "description": "Uma espada básica com ^ff0000poder de ataque +150^000000", "imageUrl": "https://exemplo.com/imagem.png"}}}
+{{#item:502}}
+{{#item:1101}}
 ```
 
 Se precisar depurar, adicione `?itemdescription-debug=1` ao final da URL. 

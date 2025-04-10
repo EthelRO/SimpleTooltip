@@ -69,11 +69,19 @@ class ItemDescriptionHooks {
 	
 	/**
 	 * Parser function handler for {{#item: id | param1=value1 | ... }}
-	 * Displays an item icon and optionally name and description
+	 * Displays an item icon with name and description by default.
+	 * 
+	 * Usage examples:
+	 * {{#item: 502}} - Shows icon, name and description (tooltip)
+	 * {{#item: 502 | noname}} or {{#item: 502 | nn}} - Hides the item name
+	 * {{#item: 502 | nodescription}} or {{#item: 502 | nd}} - Removes tooltip
+	 * {{#item: 502 | noslots}} or {{#item: 502 | ns}} - Hides slots information
+	 * {{#item: 502 | width=32}} - Sets custom icon size
+	 * {{#item: 502 | noname | nodescription}} - Shows only the icon
 	 *
 	 * @param Parser $parser
-	 * @param string $itemId
-	 * @return array
+	 * @param string $itemId The item ID to display
+	 * @return array HTML and parser options
 	 */
 	public static function itemDisplay( Parser $parser, string $itemId ) {
 		global $wgRequest;
@@ -88,27 +96,48 @@ class ItemDescriptionHooks {
 		$args = array_slice(func_get_args(), 2);
 		$params = [];
 		
-		// Valores padrão dos parâmetros
-		$params['showname'] = false;
-		$params['showdescription'] = false;
-		$params['icon_width'] = 24; // Largura padrão para o ícone
+		// Valores padrão dos parâmetros - agora true por padrão
+		$params['showname'] = true;
+		$params['showdescription'] = true;
+		$params['showslots'] = true; // Mostrar slots por padrão
+		$params['custom_size'] = false; // Não usar tamanho personalizado por padrão
+		$params['icon_width'] = 24; // Largura padrão para o ícone se especificado
 		$params['cache'] = true; // Cache habilitado por padrão
 		
-		// Processar argumentos nomeados
+		// Processar argumentos nomeados e não-nomeados
 		foreach ($args as $arg) {
-			$pair = explode('=', $arg, 2);
-			if (count($pair) == 2) {
-				$key = strtolower(trim($pair[0]));
-				$value = trim($pair[1]);
+			$arg = trim($arg);
+			
+			// Verificar se é um parâmetro nomeado (contém '=')
+			if (strpos($arg, '=') !== false) {
+				$pair = explode('=', $arg, 2);
+				if (count($pair) == 2) {
+					$key = strtolower(trim($pair[0]));
+					$value = trim($pair[1]);
+					
+					if ($key == 'width' || $key == 'icon_width' || $key == 'w') {
+						$params['icon_width'] = (int)$value;
+						$params['custom_size'] = true; // Marcar que um tamanho personalizado foi especificado
+					} elseif ($key == 'cache') {
+						$params['cache'] = self::parseBoolean($value);
+					}
+				}
+			} 
+			// Processar argumentos não-nomeados (flags)
+			else {
+				$flag = strtolower($arg);
 				
-				if ($key == 'showname' || $key == 'name' || $key == 'show_name') {
-					$params['showname'] = self::parseBoolean($value);
-				} elseif ($key == 'showdescription' || $key == 'description' || $key == 'show_description') {
-					$params['showdescription'] = self::parseBoolean($value);
-				} elseif ($key == 'width' || $key == 'icon_width') {
-					$params['icon_width'] = (int)$value;
-				} elseif ($key == 'cache') {
-					$params['cache'] = self::parseBoolean($value);
+				// Flags para desativar nome e descrição
+				if ($flag == 'noname' || $flag == 'nn') {
+					$params['showname'] = false;
+				} elseif ($flag == 'nodescription' || $flag == 'nodesc' || $flag == 'nd') {
+					$params['showdescription'] = false;
+				} elseif ($flag == 'noslots' || $flag == 'ns') {
+					$params['showslots'] = false;
+				}
+				// Se quiser adicionar outras flags no futuro
+				elseif ($flag == 'nocache' || $flag == 'nc') {
+					$params['cache'] = false;
 				}
 			}
 		}
@@ -119,19 +148,16 @@ class ItemDescriptionHooks {
 		// Inicializar HTML
 		$html = '';
 		
-		// Buscar dados do item se showname ou showdescription estiverem habilitados
-		$itemData = null;
-		if ($params['showname'] || $params['showdescription']) {
-			$itemData = self::fetchItemData($itemId, $params['cache'], $parser);
-			
-			// Verificar se o item existe
-			if (!$itemData) {
-				return ['<span class="error">Item não encontrado: ' . htmlspecialchars($itemId) . '</span>'];
-			}
+		// Sempre buscar dados do item já que agora são exibidos por padrão
+		$itemData = self::fetchItemData($itemId, $params['cache'], $parser);
+		
+		// Verificar se o item existe
+		if (!$itemData) {
+			return ['<span class="error">Item não encontrado: ' . htmlspecialchars($itemId) . '</span>'];
 		}
 		
 		// Se showdescription estiver habilitado, adicionamos o tooltip
-		if ($params['showdescription'] && $itemData) {
+		if ($params['showdescription']) {
 			// Preparar dados para o tooltip
 			$tooltipData = [
 				'id' => $itemData['id'],
@@ -151,17 +177,31 @@ class ItemDescriptionHooks {
 		
 		// Adicionar imagem do item
 		$html .= '<img src="' . htmlspecialchars($iconUrl) . '" alt="Item #' . htmlspecialchars($itemId) . '" ';
-		$html .= 'class="ethelro-item-icon" width="' . (int)$params['icon_width'] . '" height="' . (int)$params['icon_width'] . '"';
+		$html .= 'class="ethelro-item-icon"';
+		
+		// Adicionar width/height apenas se tamanho personalizado foi especificado
+		if ($params['custom_size']) {
+			$html .= ' width="' . (int)$params['icon_width'] . '" height="' . (int)$params['icon_width'] . '"';
+		}
+		
 		$html .= ' style="vertical-align: middle;"';
 		$html .= '>';
 		
 		// Adicionar nome se showname estiver habilitado
-		if ($params['showname'] && $itemData) {
-			$html .= ' <span class="ethelro-item-name">' . htmlspecialchars($itemData['name']) . '</span>';
+		if ($params['showname']) {
+			$html .= ' <span class="ethelro-item-name">' . htmlspecialchars($itemData['name']);
+			
+			// Adicionar slots se showslots estiver habilitado e slots for diferente de 0
+			$slots = isset($itemData['slots']) ? (int)$itemData['slots'] : 0;
+			if ($params['showslots'] && $slots > 0) {
+				$html .= ' [' . $slots . ']';
+			}
+			
+			$html .= '</span>';
 		}
 		
 		// Fechar tag de tooltip se showdescription estiver habilitado
-		if ($params['showdescription'] && $itemData) {
+		if ($params['showdescription']) {
 			$html .= '</span>';
 		}
 		
