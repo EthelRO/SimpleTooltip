@@ -131,28 +131,20 @@
   width: calc(100% - 95px); /* Garantir que não ultrapasse a largura disponível */
 }
 
-.ethelro-tooltip .title-divider {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 0 8px;
-  margin: 2px 0;
-}
-
-.ethelro-tooltip .divider-line {
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.15);
-  width: 100%;
-  margin: 1px 0;
-}
-
 .ethelro-tooltip .tooltip-title {
   height: auto;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding: 4px 0;
+  padding: 6px 0;
   position: relative;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.1) 2px,
+    rgba(0, 0, 0, 0.1) 3px
+  );
+  background-repeat: repeat;
 }
 
 .ethelro-tooltip .tooltip-title h1 {
@@ -162,17 +154,19 @@
   z-index: 30;
   padding: 0 8px;
   width: 100%;
+  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   position: relative;
-  margin: 4px 0;
+  margin: 0;
   font-weight: bold;
   font-family: 'FS_Tahoma', Tahoma, Arial, sans-serif;
   font-smooth: never;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
   text-rendering: optimizeSpeed;
+  background-color: #f5f5f5;
 }
 
 .ethelro-tooltip .tooltip-description {
@@ -199,23 +193,6 @@
 
 .ethelro-tooltip .item-description span[style*="color:#4EBAFE"] {
   font-weight: bold;
-}
-
-/* Adicionar linhas horizontais como separadores na descrição */
-.ethelro-tooltip .hr-divider-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  margin: 4px 0;
-  padding: 0;
-}
-
-.ethelro-tooltip .hr-divider {
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.15);
-  width: 100%;
-  border: none;
-  margin: 1px 0;
 }
 
 /* Grade background colors */
@@ -252,4 +229,19 @@
 
 .ethelro-tooltip .tooltip-description::-webkit-scrollbar-thumb:hover {
   background: #a0a0a0;
+}
+
+/* Linha divisória na descrição */
+.ethelro-tooltip .tooltip-divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.15);
+  width: 100%;
+  border: none;
+  margin: 6px 0;
+}
+
+/* Remover esses blocos */
+.ethelro-tooltip .hr-divider-container,
+.ethelro-tooltip .hr-divider {
+  display: none;
 } 
