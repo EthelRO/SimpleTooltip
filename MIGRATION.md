@@ -40,6 +40,7 @@ Substitua todas as ocorrências dos parser functions antigos pelos novos:
 - `{{#item:502|noname}}` ou `{{#item:502|nn}}` - Oculta o nome do item
 - `{{#item:502|nodescription}}` ou `{{#item:502|nd}}` - Remove o tooltip
 - `{{#item:502|noslots}}` ou `{{#item:502|ns}}` - Oculta informação de slots
+- `{{#item:502|norefine}}` ou `{{#item:502|nr}}` - Oculta o nível de refino
 - `{{#item:502|width=32}}` - Define um tamanho personalizado para o ícone
 - `{{#item:502|noname|nodescription}}` - Mostra apenas o ícone
 

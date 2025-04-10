@@ -76,6 +76,7 @@ class ItemDescriptionHooks {
 	 * {{#item: 502 | noname}} or {{#item: 502 | nn}} - Hides the item name
 	 * {{#item: 502 | nodescription}} or {{#item: 502 | nd}} - Removes tooltip
 	 * {{#item: 502 | noslots}} or {{#item: 502 | ns}} - Hides slots information
+	 * {{#item: 502 | norefine}} or {{#item: 502 | nr}} - Hides refine level
 	 * {{#item: 502 | width=32}} - Sets custom icon size
 	 * {{#item: 502 | noname | nodescription}} - Shows only the icon
 	 *
@@ -100,6 +101,7 @@ class ItemDescriptionHooks {
 		$params['showname'] = true;
 		$params['showdescription'] = true;
 		$params['showslots'] = true; // Mostrar slots por padrão
+		$params['showrefine'] = true; // Mostrar nível de refino por padrão
 		$params['custom_size'] = false; // Não usar tamanho personalizado por padrão
 		$params['icon_width'] = 24; // Largura padrão para o ícone se especificado
 		$params['cache'] = true; // Cache habilitado por padrão
@@ -134,6 +136,8 @@ class ItemDescriptionHooks {
 					$params['showdescription'] = false;
 				} elseif ($flag == 'noslots' || $flag == 'ns') {
 					$params['showslots'] = false;
+				} elseif ($flag == 'norefine' || $flag == 'nr') {
+					$params['showrefine'] = false;
 				}
 				// Se quiser adicionar outras flags no futuro
 				elseif ($flag == 'nocache' || $flag == 'nc') {
@@ -142,8 +146,9 @@ class ItemDescriptionHooks {
 			}
 		}
 		
-		// URL do ícone
-		$iconUrl = 'https://assets.ethelro.com/item/' . $itemId . '/image.png';
+		// URLs do item
+		$iconUrl = 'https://assets.ethelro.com/item/' . $itemId . '.png'; // Ícone para exibir ao lado do nome
+		$imageUrl = 'https://assets.ethelro.com/item/' . $itemId . '/image.png'; // Imagem completa para o tooltip
 		
 		// Inicializar HTML
 		$html = '';
@@ -163,9 +168,19 @@ class ItemDescriptionHooks {
 				'id' => $itemData['id'],
 				'name' => $itemData['name'],
 				'description' => $itemData['description'],
-				'imageUrl' => $iconUrl,
+				'imageUrl' => $imageUrl, // Usar a imagem completa no tooltip
 				'slots' => $itemData['slots'] ?? 0
 			];
+			
+			// Adicionar nível de refino se disponível
+			if (isset($itemData['refine']) && $itemData['refine'] > 0) {
+				$tooltipData['refine'] = $itemData['refine'];
+			}
+			
+			// Adicionar grau de encantamento se disponível
+			if (isset($itemData['enchantgrade']) && $itemData['enchantgrade'] > 0) {
+				$tooltipData['enchantgrade'] = $itemData['enchantgrade'];
+			}
 			
 			// Codificar para JSON
 			$jsonData = json_encode($tooltipData);
@@ -189,7 +204,13 @@ class ItemDescriptionHooks {
 		
 		// Adicionar nome se showname estiver habilitado
 		if ($params['showname']) {
-			$html .= ' <span class="ethelro-item-name">' . htmlspecialchars($itemData['name']);
+			// Adicionar prefixo de refino se disponível e habilitado
+			$refinePrefix = '';
+			if ($params['showrefine'] && isset($itemData['refine']) && $itemData['refine'] > 0) {
+				$refinePrefix = '+' . $itemData['refine'] . ' ';
+			}
+			
+			$html .= ' <span class="ethelro-item-name">' . $refinePrefix . htmlspecialchars($itemData['name']);
 			
 			// Adicionar slots se showslots estiver habilitado e slots for diferente de 0
 			$slots = isset($itemData['slots']) ? (int)$itemData['slots'] : 0;
