@@ -60,6 +60,13 @@
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border: 1px solid #c3c3c3;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 3px
+  );
+  background-repeat: repeat;
 }
 
 .ethelro-tooltip .gradient-border {
@@ -110,7 +117,20 @@
   flex-shrink: 0;
   padding-left: 8px;
   padding-top: 8px;
+  padding-bottom: 8px;
   z-index: 10;
+  position: relative;
+}
+
+.ethelro-tooltip .tooltip-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
+  z-index: -1;
 }
 
 .ethelro-tooltip .tooltip-image img {
@@ -132,27 +152,21 @@
 }
 
 .ethelro-tooltip .tooltip-title {
-  height: auto;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px 0;
+  padding: 0;
   position: relative;
-  background-image: repeating-linear-gradient(
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.1) 2px,
-    rgba(0, 0, 0, 0.1) 3px
-  );
-  background-repeat: repeat;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .ethelro-tooltip .tooltip-title h1 {
   color: black;
-  font-size: 15px;
+  font-size: 12px;
   letter-spacing: 0;
   z-index: 30;
-  padding: 1px 8px;
+  padding: 0 8px;
   min-width: 50px;
   max-width: 90%;
   display: inline-block;
@@ -162,7 +176,7 @@
   white-space: nowrap;
   position: relative;
   margin: 0;
-  font-weight: bold;
+  font-weight: normal;
   font-family: 'FS_Tahoma', Tahoma, Arial, sans-serif;
   font-smooth: never;
   -webkit-font-smoothing: none;
@@ -172,16 +186,17 @@
 }
 
 .ethelro-tooltip .tooltip-description {
-  padding: 0 8px;
+  padding: 3px 8px 0 8px;
   overflow-y: auto;
-  height: calc(100% - 40px);
+  height: calc(100% - 26px);
+  background-color: #f5f5f5;
 }
 
 .ethelro-tooltip .item-description {
   font-size: 12px;
   line-height: 1.4;
   color: rgba(0, 0, 0, 0.8);
-  padding: 4px 0;
+  padding: 0;
   margin: 0;
   font-family: 'FS_Tahoma', Tahoma, Arial, sans-serif;
   font-smooth: never;
