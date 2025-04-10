@@ -25,7 +25,6 @@ class ItemDescriptionHooks {
 	 */
 	public static function onParserFirstCallInit( Parser $parser ) {
 		// Register parser functions apenas para item tooltips
-		$parser->setFunctionHook( 'item-tooltip', [ __CLASS__, 'itemTooltip' ] );
 		$parser->setFunctionHook( 'tip-item', [ __CLASS__, 'itemTooltip' ] );
 		
 		// Register new item parser function
