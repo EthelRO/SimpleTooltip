@@ -13,9 +13,11 @@
 .item-tooltip-container {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
   border-radius: 8px;
-  min-width: 290px;
-  max-width: 350px;
-  pointer-events: auto !important; /* Ensure tooltip can be interacted with */
+  width: 300px;
+  max-width: 300px;
+  pointer-events: auto !important;
+  background-color: #f5f5f5;
+  border: 1px solid #c3c3c3;
 }
 
 .ethelro-item-tooltip {
@@ -51,12 +53,13 @@
 
 .ethelro-tooltip .tooltip-container {
   height: auto;
-  background-color: white;
+  background-color: #f5f5f5;
   width: 100%;
   border-radius: 8px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #c3c3c3;
 }
 
 .ethelro-tooltip .gradient-border {
@@ -125,6 +128,7 @@
   flex-direction: column;
   flex-grow: 1;
   padding-left: 0;
+  width: calc(100% - 95px); /* Garantir que não ultrapasse a largura disponível */
 }
 
 .ethelro-tooltip .tooltip-title {
@@ -132,15 +136,17 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 6px 8px 6px 0;
+  padding: 4px 8px 4px 0;
   position: relative;
 }
 
 .ethelro-tooltip .title-divider-top,
 .ethelro-tooltip .title-divider-bottom {
   height: 1px;
-  background-color: rgba(0, 0, 0, 0.08);
+  background-color: rgba(0, 0, 0, 0.15);
   width: 100%;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
 .ethelro-tooltip .title-divider-top {
@@ -153,19 +159,20 @@
 
 .ethelro-tooltip .tooltip-title h1 {
   color: black;
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 0;
   z-index: 30;
   padding-left: 8px;
-  width: 100%;
-  padding-right: 32px;
+  padding-right: 8px;
+  width: calc(100% - 16px);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   position: relative;
-  padding-top: 2px;
+  padding-top: 1px;
+  padding-bottom: 1px;
   margin: 0;
-  font-weight: normal;
+  font-weight: bold;
   font-family: 'FS_Tahoma', Tahoma, Arial, sans-serif;
   font-smooth: never;
   -webkit-font-smoothing: none;
@@ -174,24 +181,38 @@
 }
 
 .ethelro-tooltip .tooltip-description {
-  padding-left: 8px;
+  padding: 0 8px;
   overflow-y: auto;
-  height: calc(100% - 45px);
-  padding-right: 8px;
+  height: calc(100% - 40px);
 }
 
 .ethelro-tooltip .item-description {
   font-size: 12px;
+  line-height: 1.4;
   color: rgba(0, 0, 0, 0.8);
-  padding-right: 4px;
-  padding-top: 4px;
-  padding-bottom: 4px;
+  padding: 4px 0;
   margin: 0;
   font-family: 'FS_Tahoma', Tahoma, Arial, sans-serif;
   font-smooth: never;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
   text-rendering: optimizeSpeed;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.ethelro-tooltip .item-description span[style*="color:#4EBAFE"] {
+  font-weight: bold;
+}
+
+/* Adicionar linhas horizontais como separadores na descrição */
+.ethelro-tooltip .hr-divider {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.15);
+  width: 100%;
+  border: none;
+  margin: 2px 0;
 }
 
 /* Grade background colors */
