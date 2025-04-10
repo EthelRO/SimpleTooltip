@@ -18,8 +18,9 @@
 
 .ethelro-item-tooltip {
   cursor: pointer;
-  border-bottom: 1px dotted #007bff;
   display: inline-block;
+  text-decoration: none;
+  border-bottom: none;
 }
 
 .ethelro-tooltip {

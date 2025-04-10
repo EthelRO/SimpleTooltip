@@ -56,7 +56,7 @@ class ItemDescriptionHooks {
 
 		$html = '<span class="ethelro-item-tooltip"';
 		$html .= ' data-item-tooltip="' . $itemDataAttr . '"';
-		$html .= ' style="border-bottom: 1px dotted #007bff; cursor: pointer;"';
+		$html .= ' style="cursor: pointer;"';
 		$html .= '>' . htmlspecialchars( $value ) . '</span>';
 
 		return [
@@ -143,7 +143,7 @@ class ItemDescriptionHooks {
 		}
 		
 		// URL do ícone
-		$iconUrl = 'https://assets.ethelro.com/item/' . $itemId . '.png';
+		$iconUrl = 'https://assets.ethelro.com/item/' . $itemId . '/image.png';
 		
 		// Inicializar HTML
 		$html = '';

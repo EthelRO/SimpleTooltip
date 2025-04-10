@@ -105,7 +105,7 @@ https://api.ethelro.com/items/ID
 Os ícones são obtidos de:
 
 ```
-https://assets.ethelro.com/item/ID.png
+https://assets.ethelro.com/item/ID/image.png
 ```
 
 ## Depuração
