@@ -16,7 +16,7 @@
   width: 300px;
   max-width: 300px;
   pointer-events: auto !important;
-  background-color: #f5f5f5;
+  background-color: white;
   border: 1px solid #c3c3c3;
 }
 
@@ -53,20 +53,13 @@
 
 .ethelro-tooltip .tooltip-container {
   height: auto;
-  background-color: #f5f5f5;
+  background-color: white;
   width: 100%;
   border-radius: 8px;
   position: relative;
   overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border: 1px solid #c3c3c3;
-  background-image: repeating-linear-gradient(
-    transparent,
-    transparent 2px,
-    rgba(0, 0, 0, 0.12) 2px,
-    rgba(0, 0, 0, 0.12) 3px
-  );
-  background-repeat: repeat;
 }
 
 .ethelro-tooltip .gradient-border {
@@ -116,10 +109,11 @@
 .ethelro-tooltip .tooltip-image {
   flex-shrink: 0;
   padding-left: 8px;
-  padding-top: 8px;
+  padding-top: 0;
   padding-bottom: 8px;
-  z-index: 10;
+  z-index: 15;
   position: relative;
+  margin-top: -16px;
 }
 
 .ethelro-tooltip .tooltip-image::before {
@@ -132,7 +126,7 @@
   box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
   border-radius: 0;
   object-fit: contain;
-  background-color: #f8f8f8;
+  background-color: white;
   image-rendering: pixelated;
 }
 
@@ -145,13 +139,21 @@
 }
 
 .ethelro-tooltip .tooltip-title {
-  height: 22px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   padding: 0;
   position: relative;
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.12) 2px,
+    rgba(0, 0, 0, 0.12) 3px
+  );
+  background-repeat: repeat;
+  z-index: 5;
 }
 
 .ethelro-tooltip .tooltip-title h1 {
@@ -175,14 +177,14 @@
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
   text-rendering: optimizeSpeed;
-  background-color: rgba(245, 245, 245, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
 .ethelro-tooltip .tooltip-description {
   padding: 3px 8px 0 8px;
   overflow-y: auto;
-  height: calc(100% - 26px);
-  background-color: transparent;
+  height: calc(100% - 36px);
+  background-color: white;
 }
 
 .ethelro-tooltip .item-description {
@@ -199,21 +201,6 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: normal;
-  position: relative;
-  z-index: 2;
-}
-
-/* Estilos para elemento de background no parágrafo para melhorar legibilidade */
-.ethelro-tooltip .item-description::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -4px;
-  right: -4px;
-  bottom: 0;
-  background-color: rgba(245, 245, 245, 0.65);
-  z-index: -1;
-  border-radius: 2px;
 }
 
 .ethelro-tooltip .item-description span[style*="color:#4EBAFE"] {
