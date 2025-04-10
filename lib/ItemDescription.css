@@ -128,12 +128,27 @@
 }
 
 .ethelro-tooltip .tooltip-title {
-  height: 28px;
+  height: auto;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-right: 8px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 6px 8px 6px 0;
   position: relative;
+}
+
+.ethelro-tooltip .title-divider-top,
+.ethelro-tooltip .title-divider-bottom {
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.08);
+  width: 100%;
+}
+
+.ethelro-tooltip .title-divider-top {
+  margin-bottom: 3px;
+}
+
+.ethelro-tooltip .title-divider-bottom {
+  margin-top: 3px;
 }
 
 .ethelro-tooltip .tooltip-title h1 {
@@ -161,7 +176,7 @@
 .ethelro-tooltip .tooltip-description {
   padding-left: 8px;
   overflow-y: auto;
-  height: calc(100% - 28px);
+  height: calc(100% - 45px);
   padding-right: 8px;
 }
 
