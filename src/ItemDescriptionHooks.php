@@ -25,6 +25,7 @@ class ItemDescriptionHooks {
 	 */
 	public static function onParserFirstCallInit( Parser $parser ) {
 		// Register parser functions apenas para item tooltips
+		$parser->setFunctionHook( 'item-tooltip', [ __CLASS__, 'itemTooltip' ] );
 		$parser->setFunctionHook( 'tip-item', [ __CLASS__, 'itemTooltip' ] );
 		
 		// Register new item parser function
@@ -124,7 +125,7 @@ class ItemDescriptionHooks {
 		// Buscar dados do item se showname ou showdescription estiverem habilitados
 		$itemData = null;
 		if ($params['showname'] || $params['showdescription']) {
-			$itemData = self::fetchItemData($itemId, $params['cache']);
+			$itemData = self::fetchItemData($itemId, $params['cache'], $parser);
 			
 			// Verificar se o item existe
 			if (!$itemData) {
@@ -180,19 +181,25 @@ class ItemDescriptionHooks {
 	 *
 	 * @param string $itemId ID do item
 	 * @param bool $useCache Se deve usar cache
+	 * @param Parser $parser Parser object for cache
 	 * @return array|null Dados do item ou null se não encontrado
 	 */
-	private static function fetchItemData($itemId, $useCache = true) {
-		global $wgMemc;
+	private static function fetchItemData($itemId, $useCache = true, $parser = null) {
+		// Usar o sistema de cache do Parser em vez de wgMemc
+		static $itemCache = [];
 		
-		// Chave de cache
-		$cacheKey = wfMemcKey('ethelro-item', $itemId);
+		// Cache em memória estática (dentro da execução atual)
+		if (isset($itemCache[$itemId])) {
+			return $itemCache[$itemId];
+		}
 		
-		// Verificar cache
-		if ($useCache) {
-			$cached = $wgMemc->get($cacheKey);
-			if ($cached !== false) {
-				return $cached;
+		// Cache do Parser
+		if ($useCache && $parser) {
+			$cacheKey = 'ethelro-item-' . $itemId;
+			$cachedData = $parser->getOutput()->getExtensionData($cacheKey);
+			if ($cachedData !== null) {
+				$itemCache[$itemId] = $cachedData;
+				return $cachedData;
 			}
 		}
 		
@@ -223,9 +230,13 @@ class ItemDescriptionHooks {
 			return null;
 		}
 		
-		// Guardar no cache por 1 hora
-		if ($useCache) {
-			$wgMemc->set($cacheKey, $data, 3600);
+		// Guardar no cache
+		$itemCache[$itemId] = $data;
+		
+		// Guardar no cache do Parser
+		if ($useCache && $parser) {
+			$cacheKey = 'ethelro-item-' . $itemId;
+			$parser->getOutput()->setExtensionData($cacheKey, $data);
 		}
 		
 		return $data;
