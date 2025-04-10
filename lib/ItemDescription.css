@@ -176,6 +176,8 @@
   -moz-osx-font-smoothing: none;
   text-rendering: optimizeSpeed;
   background-color: rgba(245, 245, 245, 0.7);
+  text-decoration: none !important;
+  border-bottom: none !important;
 }
 
 .ethelro-tooltip .tooltip-description {
@@ -254,4 +256,19 @@
 .ethelro-item-tooltip a:visited {
   text-decoration: none !important;
   border-bottom: none !important;
+}
+
+/* Regras mais específicas para remover sublinhados */
+.ethelro-item-name,
+.ethelro-item-name:hover,
+.ethelro-item-tooltip,
+.ethelro-item-tooltip:hover,
+.ethelro-tooltip .tooltip-title h1,
+.item-tooltip-container *,
+.ethelro-tooltip a,
+.ethelro-tooltip a:hover,
+.ethelro-tooltip a:visited {
+  text-decoration: none !important;
+  border-bottom: none !important;
+  border: none !important;
 } 
