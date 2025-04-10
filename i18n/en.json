@@ -1,9 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Fannon",
-			"Kghbln"
+			"EthelRO Team"
 		]
 	},
-	"simpletooltip-desc": "Provides basic tooltips supporting inline text and info icons"
+	"itemdescription-desc": "Provides tooltips for displaying item details"
 }

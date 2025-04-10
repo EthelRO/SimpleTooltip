@@ -1,44 +1,29 @@
 {
-	"name": "SimpleTooltip",
-	"version": "2.0.0",
+	"name": "ItemDescription",
+	"version": "1.0.0",
 	"author": [
-		"Simon Heimler",
-		"Marko Ilic (gesinn.it GmbH & Co. KG)"
+		"EthelRO Team"
 	],
-	"url": "https://www.mediawiki.org/wiki/Extension:SimpleTooltip",
-	"descriptionmsg": "simpletooltip-desc",
+	"url": "https://ethelro.com",
+	"descriptionmsg": "itemdescription-desc",
 	"license-name": "MIT",
 	"type": "parserhook",
 	"requires": {
 		"MediaWiki": ">= 1.39.0"
 	},
 	"MessagesDirs": {
-		"SimpleTooltip": [
+		"ItemDescription": [
 			"i18n"
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"SimpleTooltipMagic": "SimpleTooltip.i18n.magic.php"
+		"ItemDescriptionMagic": "ItemDescription.i18n.magic.php"
 	},
 	"AutoloadClasses": {
-		"SimpleTooltipHooks": "src/SimpleTooltipHooks.php"
+		"ItemDescriptionHooks": "src/ItemDescriptionHooks.php"
 	},
 	"ResourceModules": {
-		"ext.SimpleTooltip": {
-			"targets": [
-				"mobile",
-				"desktop"
-			],
-			"scripts": [
-				"lib/jquery.tooltipster.js",
-				"lib/SimpleTooltip.js"
-			],
-			"styles": [
-				"lib/tooltipster.css",
-				"lib/SimpleTooltip.css"
-			]
-		},
-		"ext.SimpleTooltip.ItemDescription": {
+		"ext.ItemDescription": {
 			"targets": [
 				"mobile",
 				"desktop"
@@ -48,12 +33,9 @@
 			],
 			"styles": [
 				"lib/ItemDescription.css"
-			],
-			"dependencies": [
-				"ext.SimpleTooltip"
 			]
 		},
-		"ext.SimpleTooltip.Debug": {
+		"ext.ItemDescription.Debug": {
 			"targets": [
 				"mobile",
 				"desktop"
@@ -62,22 +44,22 @@
 				"lib/debug-helper.js"
 			],
 			"dependencies": [
-				"ext.SimpleTooltip.ItemDescription"
+				"ext.ItemDescription"
 			]
 		}
 	},
 	"ResourceFileModulePaths": {
 		"localBasePath": "",
-		"remoteExtPath": "SimpleTooltip"
+		"remoteExtPath": "ItemDescription"
 	},
 	"config": {
-		"SimpleTooltipSubmitText": {
-			"value": "NEW"
+		"ItemDescriptionEnabled": {
+			"value": true
 		}
 	},
 	"Hooks": {
-		"BeforePageDisplay": "SimpleTooltipHooks::onBeforePageDisplay",
-		"ParserFirstCallInit": "SimpleTooltipHooks::onParserFirstCallInit"
+		"BeforePageDisplay": "ItemDescriptionHooks::onBeforePageDisplay",
+		"ParserFirstCallInit": "ItemDescriptionHooks::onParserFirstCallInit"
 	},
 	"manifest_version": 2
 }
