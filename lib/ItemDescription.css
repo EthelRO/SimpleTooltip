@@ -16,7 +16,7 @@
   width: 300px;
   max-width: 300px;
   pointer-events: auto !important;
-  background-color: white;
+  background-color: #f5f5f5;
   border: 1px solid #c3c3c3;
 }
 
@@ -37,6 +37,7 @@
   font-kerning: none;
   font-variant-ligatures: none;
   image-rendering: pixelated;
+  text-decoration: none;
 }
 
 .ethelro-tooltip {
@@ -53,7 +54,7 @@
 
 .ethelro-tooltip .tooltip-container {
   height: auto;
-  background-color: white;
+  background-color: #f5f5f5;
   width: 100%;
   border-radius: 8px;
   position: relative;
@@ -109,15 +110,10 @@
 .ethelro-tooltip .tooltip-image {
   flex-shrink: 0;
   padding-left: 8px;
-  padding-top: 0;
+  padding-top: 8px;
   padding-bottom: 8px;
-  z-index: 15;
+  z-index: 10;
   position: relative;
-  margin-top: -16px;
-}
-
-.ethelro-tooltip .tooltip-image::before {
-  display: none;
 }
 
 .ethelro-tooltip .tooltip-image img {
@@ -126,7 +122,7 @@
   box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
   border-radius: 0;
   object-fit: contain;
-  background-color: white;
+  background-color: #f8f8f8;
   image-rendering: pixelated;
 }
 
@@ -139,21 +135,19 @@
 }
 
 .ethelro-tooltip .tooltip-title {
-  height: 32px;
+  height: 20px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  padding: 0;
+  justify-content: center;
+  padding: 4px 0;
   position: relative;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   background-image: repeating-linear-gradient(
     transparent,
     transparent 2px,
-    rgba(0, 0, 0, 0.12) 2px,
-    rgba(0, 0, 0, 0.12) 3px
+    rgba(0, 0, 0, 0.08) 2px,
+    rgba(0, 0, 0, 0.08) 3px
   );
   background-repeat: repeat;
-  z-index: 5;
 }
 
 .ethelro-tooltip .tooltip-title h1 {
@@ -165,7 +159,7 @@
   min-width: 50px;
   max-width: 90%;
   display: inline-block;
-  text-align: left;
+  text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -177,14 +171,14 @@
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: none;
   text-rendering: optimizeSpeed;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(245, 245, 245, 0.7);
 }
 
 .ethelro-tooltip .tooltip-description {
   padding: 3px 8px 0 8px;
   overflow-y: auto;
-  height: calc(100% - 36px);
-  background-color: white;
+  height: calc(100% - 28px);
+  background-color: #f5f5f5;
 }
 
 .ethelro-tooltip .item-description {

@@ -210,7 +210,7 @@ class ItemDescriptionHooks {
 				$refinePrefix = '+' . $itemData['refine'] . ' ';
 			}
 			
-			$html .= ' <span class="ethelro-item-name">' . $refinePrefix . htmlspecialchars($itemData['name']);
+			$html .= ' <span class="ethelro-item-name" style="text-decoration: none;">' . $refinePrefix . htmlspecialchars($itemData['name']);
 			
 			// Adicionar slots se showslots estiver habilitado e slots for diferente de 0
 			$slots = isset($itemData['slots']) ? (int)$itemData['slots'] : 0;
