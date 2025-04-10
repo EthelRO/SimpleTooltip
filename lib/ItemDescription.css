@@ -16,7 +16,7 @@
   width: 300px;
   max-width: 300px;
   pointer-events: auto !important;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   border: 1px solid #c3c3c3;
 }
 
@@ -41,6 +41,7 @@
   text-align: left;
   border-bottom: none !important;
   display: inline-block;
+  color: inherit;
 }
 
 .ethelro-tooltip {
@@ -57,7 +58,7 @@
 
 .ethelro-tooltip .tooltip-container {
   height: auto;
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   width: 100%;
   border-radius: 8px;
   position: relative;
@@ -181,7 +182,7 @@
   padding: 3px 8px 0 8px;
   overflow-y: auto;
   height: calc(100% - 28px);
-  background-color: #f5f5f5;
+  background-color: #ffffff;
 }
 
 .ethelro-tooltip .item-description {
