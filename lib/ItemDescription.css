@@ -3,7 +3,9 @@
 /* Add Tahoma fallback font for better cross-browser support */
 @font-face {
   font-family: 'FS_Tahoma';
-  src: local('Tahoma');
+  src: local('Tahoma'), url('/assets/fonts/windows-xp-tahoma.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
   font-display: swap;
 }
 
@@ -23,15 +25,28 @@
   border-bottom: none;
 }
 
+.ethelro-item-name {
+  font-family: 'FS_Tahoma', Tahoma, Arial, sans-serif;
+  font-size: 14px;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  text-rendering: optimizeSpeed;
+  font-kerning: none;
+  font-variant-ligatures: none;
+  image-rendering: pixelated;
+}
+
 .ethelro-tooltip {
-  font-family: Tahoma, Arial, sans-serif;
+  font-family: 'FS_Tahoma', Tahoma, Arial, sans-serif;
   font-size: 16px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
   line-height: 1.2;
-  image-rendering: auto;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  image-rendering: pixelated;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  text-rendering: optimizeSpeed;
 }
 
 .ethelro-tooltip .tooltip-container {
@@ -46,20 +61,25 @@
 
 .ethelro-tooltip .gradient-border {
   position: relative;
-  border: none;
+  border: none !important;
 }
 
 .ethelro-tooltip .gradient-border::before {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
   padding: 1px;
-  border-radius: 8px;
-  background: linear-gradient(to bottom, var(--border-start-color), rgba(255, 255, 255, 0.3));
+  background: linear-gradient(to bottom, var(--border-start-color, #c3c3c3), #c3c3c3);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
+  z-index: 35;
 }
 
 .ethelro-tooltip .grade-header {
@@ -68,7 +88,7 @@
   position: absolute;
   width: 100%;
   border-bottom-width: 1px;
-  image-rendering: auto;
+  image-rendering: pixelated;
   z-index: 15;
   mix-blend-mode: multiply;
   opacity: 1;
@@ -97,6 +117,7 @@
   border-radius: 0;
   object-fit: contain;
   background-color: #f8f8f8;
+  image-rendering: pixelated;
 }
 
 .ethelro-tooltip .tooltip-info {
@@ -118,7 +139,7 @@
 .ethelro-tooltip .tooltip-title h1 {
   color: black;
   font-size: 16px;
-  letter-spacing: -0.5px;
+  letter-spacing: 0;
   z-index: 30;
   padding-left: 8px;
   width: 100%;
@@ -130,6 +151,11 @@
   padding-top: 2px;
   margin: 0;
   font-weight: normal;
+  font-family: 'FS_Tahoma', Tahoma, Arial, sans-serif;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  text-rendering: optimizeSpeed;
 }
 
 .ethelro-tooltip .tooltip-description {
@@ -146,6 +172,11 @@
   padding-top: 4px;
   padding-bottom: 4px;
   margin: 0;
+  font-family: 'FS_Tahoma', Tahoma, Arial, sans-serif;
+  font-smooth: never;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
+  text-rendering: optimizeSpeed;
 }
 
 /* Grade background colors */
@@ -165,21 +196,21 @@
   background-color: #ffce37;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - usando o estilo do seu globals.css */
 .ethelro-tooltip .tooltip-description::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 .ethelro-tooltip .tooltip-description::-webkit-scrollbar-track {
   background: #f1f1f1;
-  border-radius: 3px;
+  border-radius: 4px;
 }
 
 .ethelro-tooltip .tooltip-description::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 3px;
+  background: #c3c3c3;
+  border-radius: 4px;
 }
 
 .ethelro-tooltip .tooltip-description::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #a0a0a0;
 } 
