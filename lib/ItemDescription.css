@@ -23,8 +23,8 @@
 .ethelro-item-tooltip {
   cursor: pointer;
   display: inline-block;
-  text-decoration: none;
-  border-bottom: none;
+  text-decoration: none !important;
+  border-bottom: none !important;
 }
 
 .ethelro-item-name {
@@ -246,4 +246,12 @@
 .ethelro-tooltip .hr-divider-container,
 .ethelro-tooltip .hr-divider {
   display: none !important;
+}
+
+/* Adicionar estilos para remover linhas de todos os links dentro de tooltips */
+.ethelro-item-tooltip a,
+.ethelro-item-tooltip a:hover,
+.ethelro-item-tooltip a:visited {
+  text-decoration: none !important;
+  border-bottom: none !important;
 } 
